@@ -11,9 +11,9 @@
 #define __NX_STRING_H__
 
 // hoxnox codecvt facets to from... functions
-#include <facet/codecvt/codecvt_cp1251.hpp>
-#include <facet/codecvt/codecvt_cp866.hpp>
-#include <facet/codecvt/mbwcvt.hpp>
+#include "facet/codecvt/codecvt_cp1251.hpp"
+#include "facet/codecvt/codecvt_cp866.hpp"
+#include "facet/codecvt/mbwcvt.hpp"
 
 // STL
 #include <algorithm>
