@@ -1,19 +1,21 @@
-/**@author Merder Kim <hoxnox@gmail.com>
+/**@file include/string.hpp
+ * @author Nosov Yuri <hoxnox@gmail.com>
  * @date 2012-04-29
- * @copyright Merder Kim
- * @licence MIT licanse
+ * @copyright (c) 2012 Nosov Yuri <hoxnox@gmail.com>
+ * @licence Querier licence
  *
  * @brief Yet another String class.
  *
  * STL std::string based*/
 
-#ifndef __NX_STRING_H__
-#define __NX_STRING_H__
+#ifndef __QRR_STRING_H__
+#define __QRR_STRING_H__
 
 // hoxnox codecvt facets to from... functions
-#include "facet/codecvt/codecvt_cp1251.hpp"
-#include "facet/codecvt/codecvt_cp866.hpp"
-#include "facet/codecvt/mbwcvt.hpp"
+#include <codecvt/codecvt_cp1251.hpp>
+#include <codecvt/codecvt_cp866.hpp>
+#include <codecvt/mbwcvt.hpp>
+
 
 // STL
 #include <algorithm>
@@ -25,6 +27,8 @@
 #include <iterator>
 #include <vector>
 
+
+namespace querier{
 
 /**@brief Replacement for L"".*/
 #define dT(x) CONCAT(L, x)
@@ -142,5 +146,7 @@ template<class InputIterator>
 {
 }
 
-#endif // __NX_STRING_H__
+} // namespace querier
+
+#endif // __QRR_STRING_H__
 

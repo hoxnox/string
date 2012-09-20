@@ -1,10 +1,14 @@
-﻿/**@author Merder Kim <hoxnox@gmail.com>
+﻿/**@file src/string.cpp
+ * @author Nosov Yuri <hoxnox@gmail.com>
  * @date 2012-04-29
- * @licence MIT licence
+ * @copyright (c) 2011 Nosov Yuri <hoxnox@gmail.com>
+ * @licence ENTY licence
  *
- * @brief Yet another string implementation*/
+ * @brief String implementation*/
 
-#include <string.hpp>
+#include "string.hpp"
+
+namespace querier{
 
 /**@class String
  * @brief Yet another string class
@@ -478,4 +482,6 @@ String String::trim()
 	else
 		return String();
 }
+
+} //namespace querier
 
