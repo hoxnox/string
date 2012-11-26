@@ -483,5 +483,25 @@ String String::trim()
 		return String();
 }
 
+/**@brief Convert to upper*/
+String String::toUpper()
+{
+	String result;
+	const std::locale ctype_loc(std::locale(), new ctype_unicode);
+	for(size_t i = 0; i < length(); ++i)
+		result += toupper(operator[](i), ctype_loc);
+	return result;
+}
+
+/**@brief Convert to lower*/
+String String::toLower()
+{
+	String result;
+	const std::locale ctype_loc(std::locale(), new ctype_unicode);
+	for(size_t i = 0; i < length(); ++i)
+		result += tolower(operator[](i), ctype_loc);
+	return result;
+}
+
 } //namespace nx
 

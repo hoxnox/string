@@ -15,6 +15,7 @@
 #include <codecvt/codecvt_cp1251.hpp>
 #include <codecvt/codecvt_cp866.hpp>
 #include <codecvt/mbwcvt.hpp>
+#include <ctype/ctype_unicode.hpp>
 
 
 // STL
@@ -107,6 +108,8 @@ public:
 	String substr(size_t pos = 0, size_t n = npos) const;
 	String field(const String separator, const size_t n) const;
 	String trim();
+	String toUpper();
+	String toLower();
 };
 
 std::ostream& operator<<(std::ostream& os, const String& str);
