@@ -8,8 +8,8 @@
  *
  * STL std::string based*/
 
-#ifndef __QRR_STRING_H__
-#define __QRR_STRING_H__
+#ifndef __NX_STRING_H__
+#define __NX_STRING_H__
 
 // hoxnox codecvt facets to from... functions
 #include <codecvt/codecvt_cp1251.hpp>
@@ -28,7 +28,7 @@
 #include <vector>
 
 
-namespace querier{
+namespace nx{
 
 /**@brief Replacement for L"".*/
 #define dT(x) CONCAT(L, x)
@@ -146,7 +146,7 @@ template<class InputIterator>
 {
 }
 
-} // namespace querier
+} // namespace nx
 
-#endif // __QRR_STRING_H__
+#endif // __NX_STRING_H__
 

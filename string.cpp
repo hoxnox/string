@@ -8,7 +8,7 @@
 
 #include "string.hpp"
 
-namespace querier{
+namespace nx{
 
 /**@class String
  * @brief Yet another string class
@@ -483,5 +483,5 @@ String String::trim()
 		return String();
 }
 
-} //namespace querier
+} //namespace nx
 
