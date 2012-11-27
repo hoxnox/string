@@ -3,21 +3,19 @@
 
 #include <locale>
 
-using namespace std;
-
 /**@brief ctype facet modification for cp1251*/
 template<class Ch>
-class ctype_cp1251 : public ctype<Ch>
+class ctype_cp1251 : public std::ctype<Ch>
 {
   public:
     typedef Ch char_type;
-    typedef typename ctype<Ch>::mask mask;
+    typedef typename std::ctype<Ch>::mask mask;
 
     enum{
-      lower = ctype<Ch>::lower,
-      upper = ctype<Ch>::upper,
-      punct = ctype<Ch>::punct,
-      alpha = ctype<Ch>::alpha
+      lower = std::ctype<Ch>::lower,
+      upper = std::ctype<Ch>::upper,
+      punct = std::ctype<Ch>::punct,
+      alpha = std::ctype<Ch>::alpha
     };
 
     explicit ctype_cp1251(size_t r = 0)
@@ -68,7 +66,7 @@ class ctype_cp1251 : public ctype<Ch>
     virtual bool do_is(mask m, Ch c) const
     {
       if( 0 <= c && c <= 127 )
-        return ctype<Ch>::do_is(m, c);
+        return std::ctype<Ch>::do_is(m, c);
       else if( -128 <= c && c < 0 )
         return ext_table[static_cast<size_t>(c*-1)] & m;
       else
@@ -107,7 +105,7 @@ class ctype_cp1251 : public ctype<Ch>
         return c;
       if( 0 <= c && c <= 127 )
       {
-        return ctype<Ch>::do_toupper(c);
+        return std::ctype<Ch>::do_toupper(c);
       }
       else if( -128 <= c && c < 0 && do_is(lower, c))
       {
@@ -137,7 +135,7 @@ class ctype_cp1251 : public ctype<Ch>
         return c;
       if( 0 <= c && c <= 127 )
       {
-        return ctype<Ch>::do_tolower(c);
+        return std::ctype<Ch>::do_tolower(c);
       }
       else if( -128 <= c && c < 0 && do_is(upper, c))
       {

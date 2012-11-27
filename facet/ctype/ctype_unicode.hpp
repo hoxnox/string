@@ -4,22 +4,20 @@
 #include <locale>
 #include <map>
 
-using namespace std;
-
 /**@brief ctype facet modification for unicode cyrillic (basic russian
  * alphabet and cyrillic extensions) symbols
  *
  * See ctype facet decl*/
-class ctype_unicode : public ctype<wchar_t>
+class ctype_unicode : public std::ctype<wchar_t>
 {
   public:
-    typedef ctype<wchar_t>::mask mask;
+    typedef std::ctype<wchar_t>::mask mask;
 
     enum{
-      lower = ctype<wchar_t>::lower,
-      upper = ctype<wchar_t>::upper,
-      alpha = ctype<wchar_t>::alpha,
-      print = ctype<wchar_t>::print
+      lower = std::ctype<wchar_t>::lower,
+      upper = std::ctype<wchar_t>::upper,
+      alpha = std::ctype<wchar_t>::alpha,
+      print = std::ctype<wchar_t>::print
     };
 
     explicit ctype_unicode(size_t r = 0)
@@ -46,7 +44,7 @@ class ctype_unicode : public ctype<wchar_t>
       if(msk != masks.end())
         return (msk->second & m) != 0;
       else
-        return ctype<wchar_t>::do_is(m,c);
+        return std::ctype<wchar_t>::do_is(m,c);
     };
 
     virtual const wchar_t* do_is(const wchar_t* b,
@@ -60,7 +58,7 @@ class ctype_unicode : public ctype<wchar_t>
         if(msk != masks.end())
           *v = msk->first;
         else
-          ctype<wchar_t>::do_is(b, b+1, v);
+          std::ctype<wchar_t>::do_is(b, b+1, v);
         ++b;
         ++v;
       }
@@ -104,7 +102,7 @@ class ctype_unicode : public ctype<wchar_t>
           return c;
         }
       }
-      return ctype<wchar_t>::do_toupper(c);
+      return std::ctype<wchar_t>::do_toupper(c);
     }
 
     virtual const wchar_t* do_toupper(wchar_t* b, const wchar_t* e) const
@@ -133,7 +131,7 @@ class ctype_unicode : public ctype<wchar_t>
           return c;
         }
       }
-      return ctype<wchar_t>::do_tolower(c);
+      return std::ctype<wchar_t>::do_tolower(c);
     }
 
     virtual const wchar_t* do_tolower(wchar_t* b, const wchar_t* e) const

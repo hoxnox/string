@@ -6,26 +6,24 @@
 
 #include <locale>
 
-using namespace std;
-
 /**@brief ctype facet for cp866 encoding*/
 template<class Ch>
-class ctype_cp866 : public ctype<Ch>
+class ctype_cp866 : public std::ctype<Ch>
 {
   public:
     typedef Ch char_type;
-    typedef typename ctype<Ch>::mask mask;
+    typedef typename std::ctype<Ch>::mask mask;
 
     enum{
-      space = ctype<Ch>::space,
-      print = ctype<Ch>::print,
-      cntrl = ctype<Ch>::cntrl,
-      upper = ctype<Ch>::upper,
-      lower = ctype<Ch>::lower,
-      alpha = ctype<Ch>::alpha,
-      digit = ctype<Ch>::digit,
-      punct = ctype<Ch>::punct,
-      xdigit= ctype<Ch>::xdigit,
+      space = std::ctype<Ch>::space,
+      print = std::ctype<Ch>::print,
+      cntrl = std::ctype<Ch>::cntrl,
+      upper = std::ctype<Ch>::upper,
+      lower = std::ctype<Ch>::lower,
+      alpha = std::ctype<Ch>::alpha,
+      digit = std::ctype<Ch>::digit,
+      punct = std::ctype<Ch>::punct,
+      xdigit= std::ctype<Ch>::xdigit,
       alnum = alpha | digit,
       graph = alnum | punct
     };
@@ -364,7 +362,7 @@ class ctype_cp866 : public ctype<Ch>
     virtual bool do_is(mask m, Ch c) const
     {
       if( 0 <= c && c <= 127 )
-        return ctype<Ch>::do_is(m, c);
+        return std::ctype<Ch>::do_is(m, c);
       else if( -128 <= c && c < 0 )
         return ext_table[static_cast<size_t>(c*-1)] & m;
       else
@@ -401,7 +399,7 @@ class ctype_cp866 : public ctype<Ch>
     {
       if( 0 <= c && c <= 127 )
       {
-        return ctype<Ch>::do_toupper(c);
+        return std::ctype<Ch>::do_toupper(c);
       }
       else if( -128 <= c && c < 0 && do_is(lower, c))
       {
@@ -429,7 +427,7 @@ class ctype_cp866 : public ctype<Ch>
     {
       if( 0 <= c && c <= 127 )
       {
-        return ctype<Ch>::do_tolower(c);
+        return std::ctype<Ch>::do_tolower(c);
       }
       else if( -128 <= c && c < 0 && do_is(upper, c))
       {
