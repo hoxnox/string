@@ -4,24 +4,26 @@
 #include <locale>
 #include <map>
 
+using namespace std;
+
 /**@brief ctype facet modification for unicode cyrillic (basic russian
  * alphabet and cyrillic extensions) symbols
  *
  * See ctype facet decl*/
-class ctype_unicode : public std::ctype<wchar_t>
+class ctype_unicode : public ctype<wchar_t>
 {
   public:
-    typedef std::ctype<wchar_t>::mask mask;
+    typedef ctype<wchar_t>::mask mask;
 
     enum{
-      lower = std::ctype<wchar_t>::lower,
-      upper = std::ctype<wchar_t>::upper,
-      alpha = std::ctype<wchar_t>::alpha,
-      print = std::ctype<wchar_t>::print
+      lower = ctype<wchar_t>::lower,
+      upper = ctype<wchar_t>::upper,
+      alpha = ctype<wchar_t>::alpha,
+      print = ctype<wchar_t>::print
     };
 
     explicit ctype_unicode(size_t r = 0)
-      : ctype<wchar_t>(r)
+      : std::ctype<wchar_t>(r)
     {
       // initializing masks map
       for(wchar_t i = 0x400; i <= 0x40F; i++)
@@ -44,7 +46,7 @@ class ctype_unicode : public std::ctype<wchar_t>
       if(msk != masks.end())
         return (msk->second & m) != 0;
       else
-        return std::ctype<wchar_t>::do_is(m,c);
+        return ctype<wchar_t>::do_is(m,c);
     };
 
     virtual const wchar_t* do_is(const wchar_t* b,
@@ -58,7 +60,7 @@ class ctype_unicode : public std::ctype<wchar_t>
         if(msk != masks.end())
           *v = msk->first;
         else
-          std::ctype<wchar_t>::do_is(b, b+1, v);
+          ctype<wchar_t>::do_is(b, b+1, v);
         ++b;
         ++v;
       }
@@ -102,7 +104,7 @@ class ctype_unicode : public std::ctype<wchar_t>
           return c;
         }
       }
-      return std::ctype<wchar_t>::do_toupper(c);
+      return ctype<wchar_t>::do_toupper(c);
     }
 
     virtual const wchar_t* do_toupper(wchar_t* b, const wchar_t* e) const
@@ -131,7 +133,7 @@ class ctype_unicode : public std::ctype<wchar_t>
           return c;
         }
       }
-      return std::ctype<wchar_t>::do_tolower(c);
+      return ctype<wchar_t>::do_tolower(c);
     }
 
     virtual const wchar_t* do_tolower(wchar_t* b, const wchar_t* e) const
