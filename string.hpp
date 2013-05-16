@@ -105,6 +105,9 @@ public:
 	bool operator==(const std::string& str) const;
 	bool operator==(const char *str) const;
 
+	static const std::locale cp1251;
+	static const std::locale cp866;
+
 	String substr(size_t pos = 0, size_t n = npos) const;
 	String field(const String separator, const size_t n) const;
 	String trim();

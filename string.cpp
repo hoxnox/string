@@ -22,6 +22,11 @@ namespace nx{
  * @endcode
  * */
 
+const std::locale String::cp1251 
+	= std::locale(std::locale("C"), new codecvt_cp1251);
+const std::locale String::cp866  
+	= std::locale(std::locale("C"), new codecvt_cp866);
+
 String::String()
 {
 }
@@ -87,7 +92,6 @@ String String::fromCP1251(const char* str)
 		return String();
 
 	// converting, using codecvt facets
-	const std::locale cp1251_loc(std::locale(), new codecvt_cp1251);
 	mbstate_t tmp;
 	const char * cnext;
 	wchar_t * wnext;
@@ -95,7 +99,7 @@ String String::fromCP1251(const char* str)
 	std::uninitialized_fill(wstr, wstr + str_l + 1, 0);
 	typedef std::codecvt<wchar_t, char, mbstate_t> cvt;
 	cvt::result res =
-	    std::use_facet<cvt>(cp1251_loc).in(tmp, str, str + str_l, cnext,
+	    std::use_facet<cvt>(cp1251).in(tmp, str, str + str_l, cnext,
 	                                                 wstr, wstr + str_l, wnext);
 	assert(res == cvt::ok);
 	String result(wstr);
@@ -112,7 +116,6 @@ String String::fromCP866(const char* str)
 		return String();
 
 	// converting, using codecvt facets
-	const std::locale cp866_loc(std::locale(), new codecvt_cp866);
 	mbstate_t tmp;
 	const char * cnext;
 	wchar_t * wnext;
@@ -120,7 +123,7 @@ String String::fromCP866(const char* str)
 	std::uninitialized_fill(wstr, wstr + str_l + 1, 0);
 	typedef std::codecvt<wchar_t, char, mbstate_t> cvt;
 	cvt::result res =
-	    std::use_facet<cvt>(cp866_loc).in(tmp, str, str + str_l, cnext,
+	    std::use_facet<cvt>(cp866).in(tmp, str, str + str_l, cnext,
 	                                           wstr, wstr + str_l, wnext);
 	assert(res == cvt::ok);
 	String result(wstr);
@@ -232,7 +235,6 @@ std::string String::toCP1251() const
 	if(std::basic_string<wchar_t>::empty())
 		return std::string();
 	// converting, using codecvt facets
-	const std::locale cp1251_loc(std::locale(), new codecvt_cp1251);
 	const wchar_t *wstr = std::basic_string<wchar_t>::c_str();
 	const size_t wstr_l = std::basic_string<wchar_t>::length();
 	mbstate_t tmp;
@@ -243,7 +245,7 @@ std::string String::toCP1251() const
 	std::uninitialized_fill(str, str + wstr_l*4 + 1, 0);
 	typedef std::codecvt<wchar_t, char, mbstate_t> cvt;
 	cvt::result res =
-	    std::use_facet<cvt>(cp1251_loc).out(tmp, wstr, wstr + wstr_l, wnext,
+	    std::use_facet<cvt>(cp1251).out(tmp, wstr, wstr + wstr_l, wnext,
 	                                             str, str + wstr_l*4, cnext);
 	assert(res == cvt::ok);
 	std::string result(str);
@@ -258,7 +260,6 @@ std::string String::toCP866() const
 	if(std::basic_string<wchar_t>::empty())
 		return std::string();
 	// converting, using codecvt facets
-	const std::locale cp866_loc(std::locale(), new codecvt_cp866);
 	const wchar_t *wstr = std::basic_string<wchar_t>::c_str();
 	const size_t wstr_l = std::basic_string<wchar_t>::length();
 	mbstate_t tmp;
@@ -269,7 +270,7 @@ std::string String::toCP866() const
 	std::uninitialized_fill(str, str + wstr_l*4 + 1, 0);
 	typedef std::codecvt<wchar_t, char, mbstate_t> cvt;
 	cvt::result res =
-	    std::use_facet<cvt>(cp866_loc).out(tmp, wstr, wstr + wstr_l, wnext,
+	    std::use_facet<cvt>(cp866).out(tmp, wstr, wstr + wstr_l, wnext,
 	                                            str, str + wstr_l*4, cnext);
 	assert(res == cvt::ok);
 	std::string result(str);
